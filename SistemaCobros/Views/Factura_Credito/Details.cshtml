@@ -1,0 +1,82 @@
+﻿@model SistemaCobros.Models.Factura_Credito
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Factura_Credito</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.total)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cantidad_cuotas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cantidad_cuotas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.monto_cuota)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.monto_cuota)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dia_mes_pago)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dia_mes_pago)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.serie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.serie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numero)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ciente.nit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ciente.nit)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_factura }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

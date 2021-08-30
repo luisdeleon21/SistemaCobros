@@ -1,0 +1,62 @@
+﻿@model IEnumerable<SistemaCobros.Models.Detalle_Gestion>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Historial de gestiones</h2>
+
+<p>
+    </p>
+<table class="table">
+    <tr>
+        <th>
+            Deudoraaaa
+        </th>
+        <th>
+            Descripción
+        </th>
+        <th>
+            Fecha
+        </th>
+        <th>
+            Hora
+        </th>
+        <th>
+          Comentario
+        </th>
+        
+        <th>
+           Gestion
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gestion.Cartera.Factura_Credito.Ciente.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.hora)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.comentario)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Tipo_Gestion.descripcion)
+        </td>
+        <td>
+           
+        </td>
+    </tr>
+}
+
+</table>

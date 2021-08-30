@@ -1,0 +1,72 @@
+﻿@model IEnumerable<SistemaCobros.Models.Gestion>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Gestiones</h2>
+
+<p>
+    @Html.ActionLink("Crear Gestion", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Gestor
+        </th>
+        <th>
+            Fecha de vencimiento
+        </th>
+        <th>
+            Saldo
+        </th>
+        <th>
+            Dia de Pago
+        </th>
+        <th>
+            Monto de cuota
+        </th>
+        <th>
+            Cuotas
+        </th>
+        <th>
+            Deuda
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cartera.Usuario.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cartera.fecha_vencimiento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cartera.saldo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cartera.Factura_Credito.dia_mes_pago)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cartera.Factura_Credito.monto_cuota)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cartera.Factura_Credito.cantidad_cuotas)
+
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cartera.Factura_Credito.total)
+
+        </td>
+        <td>
+            @Html.ActionLink("Llamar", "Edit", new { id = item.id_gestion }) |
+            @Html.ActionLink("SMS", "Details", new { id = item.id_gestion }) |
+            @Html.ActionLink("Email", "Delete", new { id = item.id_gestion }) |
+            @Html.ActionLink("Ver Gestiones", "Details", new { id = item.id_gestion })
+        </td>
+    </tr>
+}
+
+</table>

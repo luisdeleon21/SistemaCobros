@@ -1,0 +1,71 @@
+﻿@model IEnumerable<SistemaCobros.Models.Ciente>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Clientes</h2>
+
+<p>
+    @Html.ActionLink("Crear nuevo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+           NIT
+        </th>
+        <th>
+            Nombre
+        </th>
+        <th>
+            Apellido
+        </th>
+        <th>
+            Teléfono
+        </th>
+        <th>
+            Dirección
+        </th>
+        <th>
+            Correo electrónico
+        </th>
+        <th>
+            Estado
+        </th>
+      
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.apellido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.telefono)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.direccion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.correo_electronico)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Estado.descripcion)
+        </td>
+       
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.id_cliente }) |
+         
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.id_cliente })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,42 @@
+﻿@model SistemaCobros.Models.Rol
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Rol</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.id_estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado.descripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_rol }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

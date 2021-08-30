@@ -1,0 +1,78 @@
+﻿@model IEnumerable<SistemaCobros.Models.Factura_Credito>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Facturas a crédito</h2>
+
+<div class="form-actions no-color">
+    <input type="submit" value="Sincronizar facturas" class="btn btn-default" /> 
+  
+</div>
+<br />
+<br />
+<table class="table">
+    <tr>
+        <th>
+            Serie
+        </th>
+        <th>
+            Numero
+        </th>
+        <th>
+           Total
+        </th>
+        <th>
+           Cantidad de cuotas
+        </th>
+        <th>
+            Monto de cuota
+        </th>
+        <th>
+            Dia de Pago 
+        </th>
+        <th>
+            Estado
+        </th>
+
+        <th>
+            Cliente
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.serie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.numero)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.total)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cantidad_cuotas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.monto_cuota)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dia_mes_pago)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.estado)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Ciente.nombre )
+        </td>
+        <td>
+            @Html.ActionLink("Ver Pagos", "Edit", new { id = item.id_factura }) 
+        </td>
+    </tr>
+}
+
+</table>

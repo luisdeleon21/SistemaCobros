@@ -1,0 +1,39 @@
+﻿@model IEnumerable<SistemaCobros.Models.Tipo_Pago>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Tipos de pago</h2>
+
+<p>
+    @Html.ActionLink("Crear nuevo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+           Descripción
+        </th>
+        <th>
+            Recurrente
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.esRecurrente)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.id_tipo_pago }) |
+           
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.id_tipo_pago })
+        </td>
+    </tr>
+}
+
+</table>
