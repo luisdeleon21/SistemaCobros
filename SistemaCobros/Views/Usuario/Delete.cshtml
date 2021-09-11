@@ -4,49 +4,56 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Eliminar</h2>
-
-<h3>Estas seguro que deseas eliminar el registro?</h3>
-<div>
-    <h4>Usuario</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-           Nombre
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
-
-        
-
-   
-
-        <dt>
-            Estado
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Estado.descripcion)
-        </dd>
-
-        <dt>
-           Rol
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Rol.descripcion)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Eliminar" class="btn btn-default" /> |
-            @Html.ActionLink("Regresar", "Index")
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Eliminar Usuario</h6>
         </div>
-    }
+        <div class="card-body">
+            <div class="form-horizontal">
+
+                <h3>Estas seguro que deseas eliminar el registro?</h3>
+                <div>
+                 
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            Nombre
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.nombre)
+                        </dd>
+                        <dt>
+                            Estado
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Estado.descripcion)
+                        </dd>
+
+                        <dt>
+                            Rol
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Rol.descripcion)
+                        </dd>
+
+                    </dl>
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-actions no-color">
+                            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+                            @Html.ActionLink("Regresar", "Index")
+                        </div>
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>

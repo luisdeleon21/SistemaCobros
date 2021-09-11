@@ -4,38 +4,52 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Roles</h2>
-
 <p>
-    @Html.ActionLink("Crear Rol", "Create")
+    <div style="padding-left:30px">
+
+        @Html.ActionLink(" Crear Rol", "Create", new { }, new { @class = "btn btn-outline-primary btn-def " })
+
+    </div>
 </p>
-<table class="table">
-    <tr>
-        <th>
-            Rol
-        </th>
-        
-        <th>
-            Estado
-        </th>
-        <th></th>
-    </tr>
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Roles</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" cellspacing="0" style="padding-left:20px">
+                    <tr>
+                        <th>
+                            Rol
+                        </th>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.descripcion)
-        </td>
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.Estado.descripcion)
-        </td>
-        <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.id_rol }) |
-          
-            @Html.ActionLink("Eliminar", "Delete", new { id=item.id_rol })
-        </td>
-    </tr>
-}
+                        <th>
+                            Estado
+                        </th>
+                        <th></th>
+                    </tr>
 
-</table>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.descripcion)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Estado.descripcion)
+                            </td>
+                            <td>
+                                @Html.ActionLink(" ", "Edit", new { id = item.id_rol }, new { @class = "btn btn-outline-primary btn-def fa fa-edit", @style = "font-size:12px" }) 
+
+                                @Html.ActionLink(" ", "Delete", new { id = item.id_rol }, new { @class = "btn btn-outline-primary btn-def far fa-trash-alt", @style = "font-size:12px" })
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

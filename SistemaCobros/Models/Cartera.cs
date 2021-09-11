@@ -28,6 +28,7 @@ namespace SistemaCobros.Models
         public int id_usuario { get; set; }
         public int id_estado { get; set; }
         public Nullable<int> id_mora { get; set; }
+        public string descripcion { get; set; }
     
         public virtual Estado Estado { get; set; }
         public virtual Factura_Credito Factura_Credito { get; set; }

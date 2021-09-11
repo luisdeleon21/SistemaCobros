@@ -32,12 +32,12 @@ namespace SistemaCobros.Models
         public virtual DbSet<Factura_Credito> Factura_Credito { get; set; }
         public virtual DbSet<Mora> Mora { get; set; }
         public virtual DbSet<Pago> Pago { get; set; }
-        public virtual DbSet<Rol> Rol { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Tipo_Pago> Tipo_Pago { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Detalle_Gestion> Detalle_Gestion { get; set; }
         public virtual DbSet<Gestion> Gestion { get; set; }
         public virtual DbSet<Tipo_Gestion> Tipo_Gestion { get; set; }
+        public virtual DbSet<Rol> Rol { get; set; }
     }
 }

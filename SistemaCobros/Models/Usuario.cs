@@ -30,8 +30,8 @@ namespace SistemaCobros.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cartera> Cartera { get; set; }
         public virtual Estado Estado { get; set; }
-        public virtual Rol Rol { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Gestion> Gestion { get; set; }
+        public virtual Rol Rol { get; set; }
     }
 }

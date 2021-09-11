@@ -4,71 +4,82 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Cartera de cobros</h2>
+<h2 style="padding-left:20px">Cartera de cobros</h2>
 
-<p>
+<p style="padding-left:20px">
     @Html.ActionLink("Aperturar cartera", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            Fecha de vencimiento
-        </th>
-        <th>
-            Saldo
-        </th>
-        <th>
-            Estado
-        </th>
-        <th>
-            Serie Factura
-        </th>
-        <th>
-            Numero Factura
-        </th>
-        <th>
-            Mora Aplicada
-        </th>
-        <th>
-            Encargado
-        </th>
-        <th>
-            Deudor
-        </th>
-        <th></th>
-    </tr>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" cellspacing="0" style="padding-left:20px">
+                <tr>
+                    <th>
+                        Fecha de vencimiento
+                    </th>
+                    <th>
+                        Saldo
+                    </th>
+                    <th>
+                        Estado
+                    </th>
+                    <th>
+                        Serie Factura
+                    </th>
+                    <th>
+                        Numero Factura
+                    </th>
+                    <th>
+                        Mora Aplicada
+                    </th>
+                    <th>
+                        Encargado
+                    </th>
+                    <th>
+                        Deudor
+                    </th>
+                    <th></th>
+                </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.fecha_vencimiento)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.saldo)
-        </td>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.fecha_vencimiento)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.saldo)
+                        </td>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.Estado.descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Factura_Credito.serie)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Factura_Credito.numero)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Mora.descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Usuario.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Factura_Credito.Ciente.nombre)
-        </td>
-        <td>
-            @Html.ActionLink("Relizar Pago", "Edit", new { id = item.id_cartera }) 
-        </td>
-    </tr>
-}
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Estado.descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Factura_Credito.serie)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Factura_Credito.numero)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Mora.descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Usuario.nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Factura_Credito.Ciente.nombre)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Relizar Pago", "Edit", new { id = item.id_cartera })
+                        </td>
+                    </tr>
+                }
 
-</table>
+            </table>
+        </div>
+    </div>
+</div>
+

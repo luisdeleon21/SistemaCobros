@@ -20,6 +20,7 @@ namespace SistemaCobros.Models
             this.Cartera = new HashSet<Cartera>();
             this.Ciente = new HashSet<Ciente>();
             this.Usuario = new HashSet<Usuario>();
+            this.Rol = new HashSet<Rol>();
         }
     
         public int id_estado { get; set; }
@@ -29,8 +30,9 @@ namespace SistemaCobros.Models
         public virtual ICollection<Cartera> Cartera { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ciente> Ciente { get; set; }
-        public virtual Rol Rol { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuario> Usuario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Rol> Rol { get; set; }
     }
 }

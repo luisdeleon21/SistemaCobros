@@ -3,3 +3,8 @@
 ################################################################################
 
 /.vs/config
+/.vs/SistemaCobros/v15
+/packages
+/SistemaCobros/bin
+/SistemaCobros/obj/Debug
+/SistemaCobros/SistemaCobros.csproj.user
