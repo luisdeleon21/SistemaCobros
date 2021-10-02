@@ -1,5 +1,5 @@
 ﻿using System;
-using SistemaCobros.Models;
+using SistemaCobros.Models.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +12,7 @@ namespace SistemaCobros.Filters
     public class AuthorizeUser : AuthorizeAttribute
     {
         private Usuario oUsuario;
-        private sistema_cobrosEntities2 db = new sistema_cobrosEntities2();
+        private Models.ViewModel.sistema_cobrosEntities1 db = new Models.ViewModel.sistema_cobrosEntities1();
         private int idOperacion;
 
         public AuthorizeUser(int idOperacion = 0)

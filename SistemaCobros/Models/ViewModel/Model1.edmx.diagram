@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="834621e84ebe43b0bf380a4b44b379ed" Name="Diagram1">
+        <EntityTypeShape EntityType="sistema_cobrosModel.Bitacora" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistema_cobrosModel.Cartera" Width="1.5" PointX="7.5" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistema_cobrosModel.Ciente" Width="1.5" PointX="3" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistema_cobrosModel.Cliente_Tipo_Pago" Width="1.5" PointX="5.25" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistema_cobrosModel.Detalle_Gestion" Width="1.5" PointX="12.75" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistema_cobrosModel.Estado" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistema_cobrosModel.Factura_Credito" Width="1.5" PointX="5.25" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistema_cobrosModel.Gestion" Width="1.5" PointX="10.5" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistema_cobrosModel.Modulo" Width="1.5" PointX="0.75" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistema_cobrosModel.Mora" Width="1.5" PointX="5.25" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistema_cobrosModel.Operacion" Width="1.5" PointX="3" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistema_cobrosModel.Pago" Width="1.5" PointX="9.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistema_cobrosModel.Rol" Width="1.5" PointX="3" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistema_cobrosModel.rol_operacion" Width="1.5" PointX="5.25" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistema_cobrosModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistema_cobrosModel.Tipo_Gestion" Width="1.5" PointX="10.5" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistema_cobrosModel.Tipo_Pago" Width="1.5" PointX="7.5" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistema_cobrosModel.Usuario" Width="1.5" PointX="8.25" PointY="17" IsExpanded="true" />
+        <AssociationConnector Association="sistema_cobrosModel.FK_Cartera_Estado" ManuallyRouted="false" />
+        <AssociationConnector Association="sistema_cobrosModel.FK_Cartera_Factura_Credito" ManuallyRouted="false" />
+        <AssociationConnector Association="sistema_cobrosModel.FK_Cartera_Mora" ManuallyRouted="false" />
+        <AssociationConnector Association="sistema_cobrosModel.FK_Cartera_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="sistema_cobrosModel.FK_Gestion_Cartera" ManuallyRouted="false" />
+        <AssociationConnector Association="sistema_cobrosModel.FK_Pago_Cartera" ManuallyRouted="false" />
+        <AssociationConnector Association="sistema_cobrosModel.FK_Ciente_Estado" ManuallyRouted="false" />
+        <AssociationConnector Association="sistema_cobrosModel.FK_Cliente_Tipo_Pago_Ciente" ManuallyRouted="false" />
+        <AssociationConnector Association="sistema_cobrosModel.FK_Factura_Credito_Ciente" ManuallyRouted="false" />
+        <AssociationConnector Association="sistema_cobrosModel.FK_Detalle_Gestion_Gestion" ManuallyRouted="false" />
+        <AssociationConnector Association="sistema_cobrosModel.FK_Detalle_Gestion_Tipo_Gestion" ManuallyRouted="false" />
+        <AssociationConnector Association="sistema_cobrosModel.FK_Estado_Rol" ManuallyRouted="false" />
+        <AssociationConnector Association="sistema_cobrosModel.FK_Usuario_Estado" ManuallyRouted="false" />
+        <AssociationConnector Association="sistema_cobrosModel.FK_Gestion_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="sistema_cobrosModel.fk_Modulo" ManuallyRouted="false" />
+        <AssociationConnector Association="sistema_cobrosModel.fk_Operacion" ManuallyRouted="false" />
+        <AssociationConnector Association="sistema_cobrosModel.FK_Pago_Tipo_Pago" ManuallyRouted="false" />
+        <AssociationConnector Association="sistema_cobrosModel.fk_Rol" ManuallyRouted="false" />
+        <AssociationConnector Association="sistema_cobrosModel.FK_Usuario_Rol" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -7,24 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SistemaCobros.Models
+namespace SistemaCobros.Models.ViewModel
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Tipo_Pago
+    public partial class Tipo_Gestion
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tipo_Pago()
+        public Tipo_Gestion()
         {
-            this.Pago = new HashSet<Pago>();
+            this.Detalle_Gestion = new HashSet<Detalle_Gestion>();
         }
     
-        public int id_tipo_pago { get; set; }
+        public int id_tipo_gestion { get; set; }
         public string descripcion { get; set; }
-        public short esRecurrente { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Pago> Pago { get; set; }
+        public virtual ICollection<Detalle_Gestion> Detalle_Gestion { get; set; }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using SistemaCobros.Controllers;
-using SistemaCobros.Models;
+using SistemaCobros.Models.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;

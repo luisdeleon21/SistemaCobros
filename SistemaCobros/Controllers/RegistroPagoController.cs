@@ -20,8 +20,8 @@ namespace SistemaCobros.Controllers
         public ActionResult List()
         {
             List<ListRegistroPagoViewModel> lst = new List<ListRegistroPagoViewModel>();
-            using (sistema_cobrosEntities db= 
-                new sistema_cobrosEntities())
+            using (Models.ViewModel.sistema_cobrosEntities1 db = 
+                new Models.ViewModel.sistema_cobrosEntities1())
             {
              lst =
                     (from P in db.Pago
@@ -50,7 +50,7 @@ namespace SistemaCobros.Controllers
         {
             try
             {
-                using (sistema_cobrosEntities db = new sistema_cobrosEntities())
+                using (Models.ViewModel.sistema_cobrosEntities1 db = new Models.ViewModel.sistema_cobrosEntities1())
                 {
                     var oRegistroPago = new Pago();
                     oRegistroPago.monto = model.Monto;

@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SistemaCobros.Models
+namespace SistemaCobros.Models.ViewModel
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class sistema_cobrosEntities : DbContext
+    public partial class sistema_cobrosEntities1 : DbContext
     {
-        public sistema_cobrosEntities()
-            : base("name=sistema_cobrosEntities")
+        public sistema_cobrosEntities1()
+            : base("name=sistema_cobrosEntities1")
         {
         }
     
@@ -25,19 +25,23 @@ namespace SistemaCobros.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Bitacora> Bitacora { get; set; }
         public virtual DbSet<Cartera> Cartera { get; set; }
         public virtual DbSet<Ciente> Ciente { get; set; }
         public virtual DbSet<Cliente_Tipo_Pago> Cliente_Tipo_Pago { get; set; }
+        public virtual DbSet<Detalle_Gestion> Detalle_Gestion { get; set; }
         public virtual DbSet<Estado> Estado { get; set; }
         public virtual DbSet<Factura_Credito> Factura_Credito { get; set; }
+        public virtual DbSet<Gestion> Gestion { get; set; }
+        public virtual DbSet<Modulo> Modulo { get; set; }
         public virtual DbSet<Mora> Mora { get; set; }
+        public virtual DbSet<Operacion> Operacion { get; set; }
         public virtual DbSet<Pago> Pago { get; set; }
+        public virtual DbSet<Rol> Rol { get; set; }
+        public virtual DbSet<rol_operacion> rol_operacion { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<Tipo_Gestion> Tipo_Gestion { get; set; }
         public virtual DbSet<Tipo_Pago> Tipo_Pago { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
-        public virtual DbSet<Detalle_Gestion> Detalle_Gestion { get; set; }
-        public virtual DbSet<Gestion> Gestion { get; set; }
-        public virtual DbSet<Tipo_Gestion> Tipo_Gestion { get; set; }
-        public virtual DbSet<Rol> Rol { get; set; }
     }
 }

@@ -4,7 +4,18 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="sistema_cobrosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="sistema_cobrosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bitacora">
+          <Key>
+            <PropertyRef Name="id_bitacora" />
+          </Key>
+          <Property Name="id_bitacora" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="accion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="usuario" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="cliente" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fecha" Type="date" Nullable="false" />
+          <Property Name="hora" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
         <EntityType Name="Cartera">
           <Key>
             <PropertyRef Name="id_cartera" />
@@ -16,7 +27,6 @@
           <Property Name="id_usuario" Type="int" Nullable="false" />
           <Property Name="id_estado" Type="int" Nullable="false" />
           <Property Name="id_mora" Type="int" />
-          <Property Name="descripcion" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Ciente">
           <Key>
@@ -83,6 +93,13 @@
           <Property Name="id_usuario" Type="int" Nullable="false" />
           <Property Name="id_cartera" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Modulo">
+          <Key>
+            <PropertyRef Name="modulo_id" />
+          </Key>
+          <Property Name="modulo_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Mora">
           <Key>
             <PropertyRef Name="id_mora" />
@@ -90,6 +107,13 @@
           <Property Name="id_mora" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="porcentaje" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Operacion">
+          <Key>
+            <PropertyRef Name="operacion_id" />
+          </Key>
+          <Property Name="operacion_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="modulo_id" Type="int" />
         </EntityType>
         <EntityType Name="Pago">
           <Key>
@@ -109,6 +133,14 @@
           <Property Name="id_rol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="id_estado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rol_operacion">
+          <Key>
+            <PropertyRef Name="RO_id" />
+          </Key>
+          <Property Name="RO_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_rol" Type="int" />
+          <Property Name="operacion_id" Type="int" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -243,13 +275,13 @@
         </Association>
         <Association Name="FK_Estado_Rol">
           <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
-          <End Role="Rol" Type="Self.Rol" Multiplicity="*" />
+          <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Estado">
               <PropertyRef Name="id_estado" />
             </Principal>
             <Dependent Role="Rol">
-              <PropertyRef Name="id_estado" />
+              <PropertyRef Name="id_rol" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -289,6 +321,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_Modulo">
+          <End Role="Modulo" Type="Self.Modulo" Multiplicity="0..1" />
+          <End Role="Operacion" Type="Self.Operacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modulo">
+              <PropertyRef Name="modulo_id" />
+            </Principal>
+            <Dependent Role="Operacion">
+              <PropertyRef Name="modulo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Operacion">
+          <End Role="Operacion" Type="Self.Operacion" Multiplicity="0..1" />
+          <End Role="rol_operacion" Type="Self.rol_operacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operacion">
+              <PropertyRef Name="operacion_id" />
+            </Principal>
+            <Dependent Role="rol_operacion">
+              <PropertyRef Name="operacion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Pago_Cartera">
           <End Role="Cartera" Type="Self.Cartera" Multiplicity="1" />
           <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
@@ -310,6 +366,18 @@
             </Principal>
             <Dependent Role="Pago">
               <PropertyRef Name="id_tipo_pago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Rol">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
+          <End Role="rol_operacion" Type="Self.rol_operacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="id_rol" />
+            </Principal>
+            <Dependent Role="rol_operacion">
+              <PropertyRef Name="id_rol" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -338,6 +406,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="sistema_cobrosModelStoreContainer">
+          <EntitySet Name="Bitacora" EntityType="Self.Bitacora" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cartera" EntityType="Self.Cartera" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ciente" EntityType="Self.Ciente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cliente_Tipo_Pago" EntityType="Self.Cliente_Tipo_Pago" Schema="dbo" store:Type="Tables" />
@@ -345,9 +414,12 @@
           <EntitySet Name="Estado" EntityType="Self.Estado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Factura_Credito" EntityType="Self.Factura_Credito" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Gestion" EntityType="Self.Gestion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Modulo" EntityType="Self.Modulo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Mora" EntityType="Self.Mora" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Operacion" EntityType="Self.Operacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pago" EntityType="Self.Pago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rol_operacion" EntityType="Self.rol_operacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tipo_Gestion" EntityType="Self.Tipo_Gestion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tipo_Pago" EntityType="Self.Tipo_Pago" Schema="dbo" store:Type="Tables" />
@@ -400,6 +472,14 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Gestion" EntitySet="Gestion" />
           </AssociationSet>
+          <AssociationSet Name="fk_Modulo" Association="Self.fk_Modulo">
+            <End Role="Modulo" EntitySet="Modulo" />
+            <End Role="Operacion" EntitySet="Operacion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Operacion" Association="Self.fk_Operacion">
+            <End Role="Operacion" EntitySet="Operacion" />
+            <End Role="rol_operacion" EntitySet="rol_operacion" />
+          </AssociationSet>
           <AssociationSet Name="FK_Pago_Cartera" Association="Self.FK_Pago_Cartera">
             <End Role="Cartera" EntitySet="Cartera" />
             <End Role="Pago" EntitySet="Pago" />
@@ -407,6 +487,10 @@
           <AssociationSet Name="FK_Pago_Tipo_Pago" Association="Self.FK_Pago_Tipo_Pago">
             <End Role="Tipo_Pago" EntitySet="Tipo_Pago" />
             <End Role="Pago" EntitySet="Pago" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Rol" Association="Self.fk_Rol">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="rol_operacion" EntitySet="rol_operacion" />
           </AssociationSet>
           <AssociationSet Name="FK_Usuario_Estado" Association="Self.FK_Usuario_Estado">
             <End Role="Estado" EntitySet="Estado" />
@@ -417,10 +501,22 @@
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="sistema_cobrosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bitacora">
+          <Key>
+            <PropertyRef Name="id_bitacora" />
+          </Key>
+          <Property Name="id_bitacora" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="accion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cliente" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hora" Type="Time" Nullable="false" Precision="7" />
+        </EntityType>
         <EntityType Name="Cartera">
           <Key>
             <PropertyRef Name="id_cartera" />
@@ -436,9 +532,8 @@
           <NavigationProperty Name="Factura_Credito" Relationship="Self.FK_Cartera_Factura_Credito" FromRole="Cartera" ToRole="Factura_Credito" />
           <NavigationProperty Name="Mora" Relationship="Self.FK_Cartera_Mora" FromRole="Cartera" ToRole="Mora" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_Cartera_Usuario" FromRole="Cartera" ToRole="Usuario" />
+          <NavigationProperty Name="Gestion" Relationship="Self.FK_Gestion_Cartera" FromRole="Cartera" ToRole="Gestion" />
           <NavigationProperty Name="Pago" Relationship="Self.FK_Pago_Cartera" FromRole="Cartera" ToRole="Pago" />
-          <NavigationProperty Name="Gestion" Relationship="sistema_cobrosModel.FK_Gestion_Cartera" FromRole="Cartera" ToRole="Gestion" />
-          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Ciente">
           <Key>
@@ -468,6 +563,20 @@
           <Property Name="id_estado" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Ciente" Relationship="Self.FK_Cliente_Tipo_Pago_Ciente" FromRole="Cliente_Tipo_Pago" ToRole="Ciente" />
         </EntityType>
+        <EntityType Name="Detalle_Gestion">
+          <Key>
+            <PropertyRef Name="id_detalle_gestion" />
+          </Key>
+          <Property Name="id_detalle_gestion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hora" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="id_gestion" Type="Int32" Nullable="false" />
+          <Property Name="id_tipo_gestion" Type="Int32" Nullable="false" />
+          <Property Name="comentario" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Gestion" Relationship="Self.FK_Detalle_Gestion_Gestion" FromRole="Detalle_Gestion" ToRole="Gestion" />
+          <NavigationProperty Name="Tipo_Gestion" Relationship="Self.FK_Detalle_Gestion_Tipo_Gestion" FromRole="Detalle_Gestion" ToRole="Tipo_Gestion" />
+        </EntityType>
         <EntityType Name="Estado">
           <Key>
             <PropertyRef Name="id_estado" />
@@ -476,8 +585,8 @@
           <Property Name="descripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Cartera" Relationship="Self.FK_Cartera_Estado" FromRole="Estado" ToRole="Cartera" />
           <NavigationProperty Name="Ciente" Relationship="Self.FK_Ciente_Estado" FromRole="Estado" ToRole="Ciente" />
+          <NavigationProperty Name="Rol" Relationship="Self.FK_Estado_Rol" FromRole="Estado" ToRole="Rol" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_Estado" FromRole="Estado" ToRole="Usuario" />
-          <NavigationProperty Name="Rol" Relationship="sistema_cobrosModel.FK_Estado_Rol" FromRole="Estado" ToRole="Rol" />
         </EntityType>
         <EntityType Name="Factura_Credito">
           <Key>
@@ -490,10 +599,29 @@
           <Property Name="id_cliente" Type="Int32" Nullable="false" />
           <Property Name="dia_mes_pago" Type="Int32" Nullable="false" />
           <Property Name="estado" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Cartera" Relationship="Self.FK_Cartera_Factura_Credito" FromRole="Factura_Credito" ToRole="Cartera" />
-          <NavigationProperty Name="Ciente" Relationship="Self.FK_Factura_Credito_Ciente" FromRole="Factura_Credito" ToRole="Ciente" />
           <Property Name="serie" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="numero" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cartera" Relationship="Self.FK_Cartera_Factura_Credito" FromRole="Factura_Credito" ToRole="Cartera" />
+          <NavigationProperty Name="Ciente" Relationship="Self.FK_Factura_Credito_Ciente" FromRole="Factura_Credito" ToRole="Ciente" />
+        </EntityType>
+        <EntityType Name="Gestion">
+          <Key>
+            <PropertyRef Name="id_gestion" />
+          </Key>
+          <Property Name="id_gestion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="id_cartera" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cartera" Relationship="Self.FK_Gestion_Cartera" FromRole="Gestion" ToRole="Cartera" />
+          <NavigationProperty Name="Detalle_Gestion" Relationship="Self.FK_Detalle_Gestion_Gestion" FromRole="Gestion" ToRole="Detalle_Gestion" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Gestion_Usuario" FromRole="Gestion" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Modulo">
+          <Key>
+            <PropertyRef Name="modulo_id" />
+          </Key>
+          <Property Name="modulo_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Operacion" Relationship="Self.fk_Modulo" FromRole="Modulo" ToRole="Operacion" />
         </EntityType>
         <EntityType Name="Mora">
           <Key>
@@ -503,6 +631,15 @@
           <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="porcentaje" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
           <NavigationProperty Name="Cartera" Relationship="Self.FK_Cartera_Mora" FromRole="Mora" ToRole="Cartera" />
+        </EntityType>
+        <EntityType Name="Operacion">
+          <Key>
+            <PropertyRef Name="operacion_id" />
+          </Key>
+          <Property Name="operacion_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="modulo_id" Type="Int32" />
+          <NavigationProperty Name="Modulo" Relationship="Self.fk_Modulo" FromRole="Operacion" ToRole="Modulo" />
+          <NavigationProperty Name="rol_operacion" Relationship="Self.fk_Operacion" FromRole="Operacion" ToRole="rol_operacion" />
         </EntityType>
         <EntityType Name="Pago">
           <Key>
@@ -517,6 +654,27 @@
           <NavigationProperty Name="Cartera" Relationship="Self.FK_Pago_Cartera" FromRole="Pago" ToRole="Cartera" />
           <NavigationProperty Name="Tipo_Pago" Relationship="Self.FK_Pago_Tipo_Pago" FromRole="Pago" ToRole="Tipo_Pago" />
         </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="id_rol" />
+          </Key>
+          <Property Name="id_rol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_estado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Estado" Relationship="Self.FK_Estado_Rol" FromRole="Rol" ToRole="Estado" />
+          <NavigationProperty Name="rol_operacion" Relationship="Self.fk_Rol" FromRole="Rol" ToRole="rol_operacion" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_Rol" FromRole="Rol" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="rol_operacion">
+          <Key>
+            <PropertyRef Name="RO_id" />
+          </Key>
+          <Property Name="RO_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_rol" Type="Int32" />
+          <Property Name="operacion_id" Type="Int32" />
+          <NavigationProperty Name="Operacion" Relationship="Self.fk_Operacion" FromRole="rol_operacion" ToRole="Operacion" />
+          <NavigationProperty Name="Rol" Relationship="Self.fk_Rol" FromRole="rol_operacion" ToRole="Rol" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -526,6 +684,14 @@
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tipo_Gestion">
+          <Key>
+            <PropertyRef Name="id_tipo_gestion" />
+          </Key>
+          <Property Name="id_tipo_gestion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Detalle_Gestion" Relationship="Self.FK_Detalle_Gestion_Tipo_Gestion" FromRole="Tipo_Gestion" ToRole="Detalle_Gestion" />
         </EntityType>
         <EntityType Name="Tipo_Pago">
           <Key>
@@ -547,8 +713,8 @@
           <Property Name="id_estado" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Cartera" Relationship="Self.FK_Cartera_Usuario" FromRole="Usuario" ToRole="Cartera" />
           <NavigationProperty Name="Estado" Relationship="Self.FK_Usuario_Estado" FromRole="Usuario" ToRole="Estado" />
-          <NavigationProperty Name="Gestion" Relationship="sistema_cobrosModel.FK_Gestion_Usuario" FromRole="Usuario" ToRole="Gestion" />
-          <NavigationProperty Name="Rol" Relationship="sistema_cobrosModel.FK_Usuario_Rol" FromRole="Usuario" ToRole="Rol" />
+          <NavigationProperty Name="Gestion" Relationship="Self.FK_Gestion_Usuario" FromRole="Usuario" ToRole="Gestion" />
+          <NavigationProperty Name="Rol" Relationship="Self.FK_Usuario_Rol" FromRole="Usuario" ToRole="Rol" />
         </EntityType>
         <Association Name="FK_Cartera_Estado">
           <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
@@ -595,6 +761,18 @@
             </Principal>
             <Dependent Role="Cartera">
               <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Gestion_Cartera">
+          <End Role="Cartera" Type="Self.Cartera" Multiplicity="1" />
+          <End Role="Gestion" Type="Self.Gestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cartera">
+              <PropertyRef Name="id_cartera" />
+            </Principal>
+            <Dependent Role="Gestion">
+              <PropertyRef Name="id_cartera" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -646,6 +824,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Detalle_Gestion_Gestion">
+          <End Role="Gestion" Type="Self.Gestion" Multiplicity="1" />
+          <End Role="Detalle_Gestion" Type="Self.Detalle_Gestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gestion">
+              <PropertyRef Name="id_gestion" />
+            </Principal>
+            <Dependent Role="Detalle_Gestion">
+              <PropertyRef Name="id_gestion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Detalle_Gestion_Tipo_Gestion">
+          <End Role="Tipo_Gestion" Type="Self.Tipo_Gestion" Multiplicity="1" />
+          <End Role="Detalle_Gestion" Type="Self.Detalle_Gestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Gestion">
+              <PropertyRef Name="id_tipo_gestion" />
+            </Principal>
+            <Dependent Role="Detalle_Gestion">
+              <PropertyRef Name="id_tipo_gestion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Estado_Rol">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
+          <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="id_estado" />
+            </Principal>
+            <Dependent Role="Rol">
+              <PropertyRef Name="id_rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Usuario_Estado">
           <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
@@ -655,6 +869,42 @@
             </Principal>
             <Dependent Role="Usuario">
               <PropertyRef Name="id_estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Gestion_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Gestion" Type="Self.Gestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="Gestion">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Modulo">
+          <End Role="Modulo" Type="Self.Modulo" Multiplicity="0..1" />
+          <End Role="Operacion" Type="Self.Operacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modulo">
+              <PropertyRef Name="modulo_id" />
+            </Principal>
+            <Dependent Role="Operacion">
+              <PropertyRef Name="modulo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Operacion">
+          <End Role="Operacion" Type="Self.Operacion" Multiplicity="0..1" />
+          <End Role="rol_operacion" Type="Self.rol_operacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operacion">
+              <PropertyRef Name="operacion_id" />
+            </Principal>
+            <Dependent Role="rol_operacion">
+              <PropertyRef Name="operacion_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -670,15 +920,47 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="sistema_cobrosEntities" annotation:LazyLoadingEnabled="true">
+        <Association Name="fk_Rol">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
+          <End Role="rol_operacion" Type="Self.rol_operacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="id_rol" />
+            </Principal>
+            <Dependent Role="rol_operacion">
+              <PropertyRef Name="id_rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Rol">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="id_rol" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="id_rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="sistema_cobrosEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bitacora" EntityType="Self.Bitacora" />
           <EntitySet Name="Cartera" EntityType="Self.Cartera" />
           <EntitySet Name="Ciente" EntityType="Self.Ciente" />
           <EntitySet Name="Cliente_Tipo_Pago" EntityType="Self.Cliente_Tipo_Pago" />
+          <EntitySet Name="Detalle_Gestion" EntityType="Self.Detalle_Gestion" />
           <EntitySet Name="Estado" EntityType="Self.Estado" />
           <EntitySet Name="Factura_Credito" EntityType="Self.Factura_Credito" />
+          <EntitySet Name="Gestion" EntityType="Self.Gestion" />
+          <EntitySet Name="Modulo" EntityType="Self.Modulo" />
           <EntitySet Name="Mora" EntityType="Self.Mora" />
+          <EntitySet Name="Operacion" EntityType="Self.Operacion" />
           <EntitySet Name="Pago" EntityType="Self.Pago" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" />
+          <EntitySet Name="rol_operacion" EntityType="Self.rol_operacion" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Tipo_Gestion" EntityType="Self.Tipo_Gestion" />
           <EntitySet Name="Tipo_Pago" EntityType="Self.Tipo_Pago" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" />
           <AssociationSet Name="FK_Cartera_Estado" Association="Self.FK_Cartera_Estado">
@@ -697,6 +979,10 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Cartera" EntitySet="Cartera" />
           </AssociationSet>
+          <AssociationSet Name="FK_Gestion_Cartera" Association="Self.FK_Gestion_Cartera">
+            <End Role="Cartera" EntitySet="Cartera" />
+            <End Role="Gestion" EntitySet="Gestion" />
+          </AssociationSet>
           <AssociationSet Name="FK_Pago_Cartera" Association="Self.FK_Pago_Cartera">
             <End Role="Cartera" EntitySet="Cartera" />
             <End Role="Pago" EntitySet="Pago" />
@@ -713,168 +999,68 @@
             <End Role="Ciente" EntitySet="Ciente" />
             <End Role="Factura_Credito" EntitySet="Factura_Credito" />
           </AssociationSet>
+          <AssociationSet Name="FK_Detalle_Gestion_Gestion" Association="Self.FK_Detalle_Gestion_Gestion">
+            <End Role="Gestion" EntitySet="Gestion" />
+            <End Role="Detalle_Gestion" EntitySet="Detalle_Gestion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Detalle_Gestion_Tipo_Gestion" Association="Self.FK_Detalle_Gestion_Tipo_Gestion">
+            <End Role="Tipo_Gestion" EntitySet="Tipo_Gestion" />
+            <End Role="Detalle_Gestion" EntitySet="Detalle_Gestion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Estado_Rol" Association="Self.FK_Estado_Rol">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Rol" EntitySet="Rol" />
+          </AssociationSet>
           <AssociationSet Name="FK_Usuario_Estado" Association="Self.FK_Usuario_Estado">
             <End Role="Estado" EntitySet="Estado" />
             <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Gestion_Usuario" Association="Self.FK_Gestion_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Gestion" EntitySet="Gestion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Modulo" Association="Self.fk_Modulo">
+            <End Role="Modulo" EntitySet="Modulo" />
+            <End Role="Operacion" EntitySet="Operacion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Operacion" Association="Self.fk_Operacion">
+            <End Role="Operacion" EntitySet="Operacion" />
+            <End Role="rol_operacion" EntitySet="rol_operacion" />
           </AssociationSet>
           <AssociationSet Name="FK_Pago_Tipo_Pago" Association="Self.FK_Pago_Tipo_Pago">
             <End Role="Tipo_Pago" EntitySet="Tipo_Pago" />
             <End Role="Pago" EntitySet="Pago" />
           </AssociationSet>
-          <EntitySet Name="Detalle_Gestion" EntityType="sistema_cobrosModel.Detalle_Gestion" />
-          <EntitySet Name="Gestion" EntityType="sistema_cobrosModel.Gestion" />
-          <EntitySet Name="Tipo_Gestion" EntityType="sistema_cobrosModel.Tipo_Gestion" />
-          <AssociationSet Name="FK_Gestion_Cartera" Association="sistema_cobrosModel.FK_Gestion_Cartera">
-            <End Role="Cartera" EntitySet="Cartera" />
-            <End Role="Gestion" EntitySet="Gestion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Detalle_Gestion_Gestion" Association="sistema_cobrosModel.FK_Detalle_Gestion_Gestion">
-            <End Role="Gestion" EntitySet="Gestion" />
-            <End Role="Detalle_Gestion" EntitySet="Detalle_Gestion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Detalle_Gestion_Tipo_Gestion" Association="sistema_cobrosModel.FK_Detalle_Gestion_Tipo_Gestion">
-            <End Role="Tipo_Gestion" EntitySet="Tipo_Gestion" />
-            <End Role="Detalle_Gestion" EntitySet="Detalle_Gestion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Gestion_Usuario" Association="sistema_cobrosModel.FK_Gestion_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Gestion" EntitySet="Gestion" />
-          </AssociationSet>
-          <EntitySet Name="Rol" EntityType="sistema_cobrosModel.Rol" />
-          <AssociationSet Name="FK_Estado_Rol" Association="sistema_cobrosModel.FK_Estado_Rol">
-            <End Role="Estado" EntitySet="Estado" />
+          <AssociationSet Name="fk_Rol" Association="Self.fk_Rol">
             <End Role="Rol" EntitySet="Rol" />
+            <End Role="rol_operacion" EntitySet="rol_operacion" />
           </AssociationSet>
-          <AssociationSet Name="FK_Usuario_Rol" Association="sistema_cobrosModel.FK_Usuario_Rol">
+          <AssociationSet Name="FK_Usuario_Rol" Association="Self.FK_Usuario_Rol">
             <End Role="Rol" EntitySet="Rol" />
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Detalle_Gestion">
-          <Key>
-            <PropertyRef Name="id_detalle_gestion" />
-          </Key>
-          <Property Name="id_detalle_gestion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="hora" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="id_gestion" Type="Int32" Nullable="false" />
-          <Property Name="id_tipo_gestion" Type="Int32" Nullable="false" />
-          <Property Name="comentario" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Gestion" Relationship="sistema_cobrosModel.FK_Detalle_Gestion_Gestion" FromRole="Detalle_Gestion" ToRole="Gestion" />
-          <NavigationProperty Name="Tipo_Gestion" Relationship="sistema_cobrosModel.FK_Detalle_Gestion_Tipo_Gestion" FromRole="Detalle_Gestion" ToRole="Tipo_Gestion" />
-        </EntityType>
-        <EntityType Name="Gestion">
-          <Key>
-            <PropertyRef Name="id_gestion" />
-          </Key>
-          <Property Name="id_gestion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_usuario" Type="Int32" Nullable="false" />
-          <Property Name="id_cartera" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Cartera" Relationship="sistema_cobrosModel.FK_Gestion_Cartera" FromRole="Gestion" ToRole="Cartera" />
-          <NavigationProperty Name="Detalle_Gestion" Relationship="sistema_cobrosModel.FK_Detalle_Gestion_Gestion" FromRole="Gestion" ToRole="Detalle_Gestion" />
-          <NavigationProperty Name="Usuario" Relationship="sistema_cobrosModel.FK_Gestion_Usuario" FromRole="Gestion" ToRole="Usuario" />
-        </EntityType>
-        <EntityType Name="Tipo_Gestion">
-          <Key>
-            <PropertyRef Name="id_tipo_gestion" />
-          </Key>
-          <Property Name="id_tipo_gestion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Detalle_Gestion" Relationship="sistema_cobrosModel.FK_Detalle_Gestion_Tipo_Gestion" FromRole="Tipo_Gestion" ToRole="Detalle_Gestion" />
-        </EntityType>
-        <Association Name="FK_Gestion_Cartera">
-          <End Type="sistema_cobrosModel.Cartera" Role="Cartera" Multiplicity="1" />
-          <End Type="sistema_cobrosModel.Gestion" Role="Gestion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cartera">
-              <PropertyRef Name="id_cartera" />
-            </Principal>
-            <Dependent Role="Gestion">
-              <PropertyRef Name="id_cartera" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Detalle_Gestion_Gestion">
-          <End Type="sistema_cobrosModel.Gestion" Role="Gestion" Multiplicity="1" />
-          <End Type="sistema_cobrosModel.Detalle_Gestion" Role="Detalle_Gestion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Gestion">
-              <PropertyRef Name="id_gestion" />
-            </Principal>
-            <Dependent Role="Detalle_Gestion">
-              <PropertyRef Name="id_gestion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Detalle_Gestion_Tipo_Gestion">
-          <End Type="sistema_cobrosModel.Tipo_Gestion" Role="Tipo_Gestion" Multiplicity="1" />
-          <End Type="sistema_cobrosModel.Detalle_Gestion" Role="Detalle_Gestion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tipo_Gestion">
-              <PropertyRef Name="id_tipo_gestion" />
-            </Principal>
-            <Dependent Role="Detalle_Gestion">
-              <PropertyRef Name="id_tipo_gestion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Gestion_Usuario">
-          <End Type="sistema_cobrosModel.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="sistema_cobrosModel.Gestion" Role="Gestion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="id_usuario" />
-            </Principal>
-            <Dependent Role="Gestion">
-              <PropertyRef Name="id_usuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Rol">
-          <Key>
-            <PropertyRef Name="id_rol" />
-          </Key>
-          <Property Name="id_rol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="id_estado" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Estado" Relationship="sistema_cobrosModel.FK_Estado_Rol" FromRole="Rol" ToRole="Estado" />
-          <NavigationProperty Name="Usuario" Relationship="sistema_cobrosModel.FK_Usuario_Rol" FromRole="Rol" ToRole="Usuario" />
-        </EntityType>
-        <Association Name="FK_Estado_Rol">
-          <End Type="sistema_cobrosModel.Estado" Role="Estado" Multiplicity="1" />
-          <End Type="sistema_cobrosModel.Rol" Role="Rol" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Estado">
-              <PropertyRef Name="id_estado" />
-            </Principal>
-            <Dependent Role="Rol">
-              <PropertyRef Name="id_estado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Usuario_Rol">
-          <End Type="sistema_cobrosModel.Rol" Role="Rol" Multiplicity="1" />
-          <End Type="sistema_cobrosModel.Usuario" Role="Usuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rol">
-              <PropertyRef Name="id_rol" />
-            </Principal>
-            <Dependent Role="Usuario">
-              <PropertyRef Name="id_rol" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="sistema_cobrosModelStoreContainer" CdmEntityContainer="sistema_cobrosEntities">
+        <EntityContainerMapping StorageEntityContainer="sistema_cobrosModelStoreContainer" CdmEntityContainer="sistema_cobrosEntities1">
+          <EntitySetMapping Name="Bitacora">
+            <EntityTypeMapping TypeName="sistema_cobrosModel.Bitacora">
+              <MappingFragment StoreEntitySet="Bitacora">
+                <ScalarProperty Name="id_bitacora" ColumnName="id_bitacora" />
+                <ScalarProperty Name="accion" ColumnName="accion" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="cliente" ColumnName="cliente" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="hora" ColumnName="hora" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Cartera">
             <EntityTypeMapping TypeName="sistema_cobrosModel.Cartera">
               <MappingFragment StoreEntitySet="Cartera">
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="id_cartera" ColumnName="id_cartera" />
                 <ScalarProperty Name="fecha_vencimiento" ColumnName="fecha_vencimiento" />
                 <ScalarProperty Name="saldo" ColumnName="saldo" />
@@ -911,6 +1097,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Detalle_Gestion">
+            <EntityTypeMapping TypeName="sistema_cobrosModel.Detalle_Gestion">
+              <MappingFragment StoreEntitySet="Detalle_Gestion">
+                <ScalarProperty Name="id_detalle_gestion" ColumnName="id_detalle_gestion" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="hora" ColumnName="hora" />
+                <ScalarProperty Name="id_gestion" ColumnName="id_gestion" />
+                <ScalarProperty Name="id_tipo_gestion" ColumnName="id_tipo_gestion" />
+                <ScalarProperty Name="comentario" ColumnName="comentario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Estado">
             <EntityTypeMapping TypeName="sistema_cobrosModel.Estado">
               <MappingFragment StoreEntitySet="Estado">
@@ -922,8 +1121,6 @@
           <EntitySetMapping Name="Factura_Credito">
             <EntityTypeMapping TypeName="sistema_cobrosModel.Factura_Credito">
               <MappingFragment StoreEntitySet="Factura_Credito">
-                <ScalarProperty Name="numero" ColumnName="numero" />
-                <ScalarProperty Name="serie" ColumnName="serie" />
                 <ScalarProperty Name="id_factura" ColumnName="id_factura" />
                 <ScalarProperty Name="total" ColumnName="total" />
                 <ScalarProperty Name="cantidad_cuotas" ColumnName="cantidad_cuotas" />
@@ -931,6 +1128,25 @@
                 <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
                 <ScalarProperty Name="dia_mes_pago" ColumnName="dia_mes_pago" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="serie" ColumnName="serie" />
+                <ScalarProperty Name="numero" ColumnName="numero" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gestion">
+            <EntityTypeMapping TypeName="sistema_cobrosModel.Gestion">
+              <MappingFragment StoreEntitySet="Gestion">
+                <ScalarProperty Name="id_gestion" ColumnName="id_gestion" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="id_cartera" ColumnName="id_cartera" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modulo">
+            <EntityTypeMapping TypeName="sistema_cobrosModel.Modulo">
+              <MappingFragment StoreEntitySet="Modulo">
+                <ScalarProperty Name="modulo_id" ColumnName="modulo_id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -940,6 +1156,14 @@
                 <ScalarProperty Name="id_mora" ColumnName="id_mora" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="porcentaje" ColumnName="porcentaje" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Operacion">
+            <EntityTypeMapping TypeName="sistema_cobrosModel.Operacion">
+              <MappingFragment StoreEntitySet="Operacion">
+                <ScalarProperty Name="operacion_id" ColumnName="operacion_id" />
+                <ScalarProperty Name="modulo_id" ColumnName="modulo_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -955,6 +1179,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Rol">
+            <EntityTypeMapping TypeName="sistema_cobrosModel.Rol">
+              <MappingFragment StoreEntitySet="Rol">
+                <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rol_operacion">
+            <EntityTypeMapping TypeName="sistema_cobrosModel.rol_operacion">
+              <MappingFragment StoreEntitySet="rol_operacion">
+                <ScalarProperty Name="RO_id" ColumnName="RO_id" />
+                <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+                <ScalarProperty Name="operacion_id" ColumnName="operacion_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="sistema_cobrosModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -963,6 +1205,14 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipo_Gestion">
+            <EntityTypeMapping TypeName="sistema_cobrosModel.Tipo_Gestion">
+              <MappingFragment StoreEntitySet="Tipo_Gestion">
+                <ScalarProperty Name="id_tipo_gestion" ColumnName="id_tipo_gestion" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -983,45 +1233,6 @@
                 <ScalarProperty Name="contrasena" ColumnName="contrasena" />
                 <ScalarProperty Name="id_rol" ColumnName="id_rol" />
                 <ScalarProperty Name="id_estado" ColumnName="id_estado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Detalle_Gestion">
-            <EntityTypeMapping TypeName="sistema_cobrosModel.Detalle_Gestion">
-              <MappingFragment StoreEntitySet="Detalle_Gestion">
-                <ScalarProperty Name="comentario" ColumnName="comentario" />
-                <ScalarProperty Name="id_tipo_gestion" ColumnName="id_tipo_gestion" />
-                <ScalarProperty Name="id_gestion" ColumnName="id_gestion" />
-                <ScalarProperty Name="hora" ColumnName="hora" />
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="id_detalle_gestion" ColumnName="id_detalle_gestion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Gestion">
-            <EntityTypeMapping TypeName="sistema_cobrosModel.Gestion">
-              <MappingFragment StoreEntitySet="Gestion">
-                <ScalarProperty Name="id_cartera" ColumnName="id_cartera" />
-                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
-                <ScalarProperty Name="id_gestion" ColumnName="id_gestion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tipo_Gestion">
-            <EntityTypeMapping TypeName="sistema_cobrosModel.Tipo_Gestion">
-              <MappingFragment StoreEntitySet="Tipo_Gestion">
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="id_tipo_gestion" ColumnName="id_tipo_gestion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Rol">
-            <EntityTypeMapping TypeName="sistema_cobrosModel.Rol">
-              <MappingFragment StoreEntitySet="Rol">
-                <ScalarProperty Name="id_estado" ColumnName="id_estado" />
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="id_rol" ColumnName="id_rol" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

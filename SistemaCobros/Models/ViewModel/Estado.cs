@@ -7,36 +7,30 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SistemaCobros.Models
+namespace SistemaCobros.Models.ViewModel
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Cartera
+    public partial class Estado
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Cartera()
+        public Estado()
         {
-            this.Pago = new HashSet<Pago>();
-            this.Gestion = new HashSet<Gestion>();
+            this.Cartera = new HashSet<Cartera>();
+            this.Ciente = new HashSet<Ciente>();
+            this.Usuario = new HashSet<Usuario>();
         }
     
-        public int id_cartera { get; set; }
-        public System.DateTime fecha_vencimiento { get; set; }
-        public decimal saldo { get; set; }
-        public int id_factura { get; set; }
-        public int id_usuario { get; set; }
         public int id_estado { get; set; }
-        public Nullable<int> id_mora { get; set; }
         public string descripcion { get; set; }
     
-        public virtual Estado Estado { get; set; }
-        public virtual Factura_Credito Factura_Credito { get; set; }
-        public virtual Mora Mora { get; set; }
-        public virtual Usuario Usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Pago> Pago { get; set; }
+        public virtual ICollection<Cartera> Cartera { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Gestion> Gestion { get; set; }
+        public virtual ICollection<Ciente> Ciente { get; set; }
+        public virtual Rol Rol { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Usuario> Usuario { get; set; }
     }
 }

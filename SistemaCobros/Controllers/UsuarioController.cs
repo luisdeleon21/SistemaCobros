@@ -12,7 +12,7 @@ namespace SistemaCobros.Views
 {
     public class UsuarioController : Controller
     {
-        private sistema_cobrosEntities db = new sistema_cobrosEntities();
+        private Models.ViewModel.sistema_cobrosEntities1 db = new Models.ViewModel.sistema_cobrosEntities1();
 
         // GET: Usuario
         public ActionResult Index()

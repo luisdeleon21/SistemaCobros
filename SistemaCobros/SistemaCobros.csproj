@@ -149,65 +149,77 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Cartera.cs">
-      <DependentUpon>SistemaCoboros.tt</DependentUpon>
+    <Compile Include="Models\ViewModel\Bitacora.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Ciente.cs">
-      <DependentUpon>SistemaCoboros.tt</DependentUpon>
+    <Compile Include="Models\ViewModel\Cartera.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Cliente_Tipo_Pago.cs">
-      <DependentUpon>SistemaCoboros.tt</DependentUpon>
+    <Compile Include="Models\ViewModel\Ciente.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Detalle_Gestion.cs">
-      <DependentUpon>SistemaCoboros.tt</DependentUpon>
+    <Compile Include="Models\ViewModel\Cliente_Tipo_Pago.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Estado.cs">
-      <DependentUpon>SistemaCoboros.tt</DependentUpon>
+    <Compile Include="Models\ViewModel\Detalle_Gestion.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Factura_Credito.cs">
-      <DependentUpon>SistemaCoboros.tt</DependentUpon>
+    <Compile Include="Models\ViewModel\Estado.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Gestion.cs">
-      <DependentUpon>SistemaCoboros.tt</DependentUpon>
+    <Compile Include="Models\ViewModel\Factura_Credito.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Mora.cs">
-      <DependentUpon>SistemaCoboros.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Pago.cs">
-      <DependentUpon>SistemaCoboros.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Rol.cs">
-      <DependentUpon>SistemaCoboros.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SistemaCoboros.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SistemaCoboros.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SistemaCoboros.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SistemaCoboros.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SistemaCoboros.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SistemaCoboros.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>SistemaCoboros.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Tipo_Gestion.cs">
-      <DependentUpon>SistemaCoboros.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Tipo_Pago.cs">
-      <DependentUpon>SistemaCoboros.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Usuario.cs">
-      <DependentUpon>SistemaCoboros.tt</DependentUpon>
+    <Compile Include="Models\ViewModel\Gestion.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModel\InsertRegistroPagoViewModel.cs" />
     <Compile Include="Models\ViewModel\ListRegistroPagoViewModel.cs" />
+    <Compile Include="Models\ViewModel\Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewModel\Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewModel\Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewModel\Modulo.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewModel\Mora.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewModel\Operacion.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewModel\Pago.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewModel\Rol.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewModel\rol_operacion.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewModel\sysdiagrams.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewModel\Tipo_Gestion.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewModel\Tipo_Pago.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewModel\Usuario.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\CarteraController.cs" />
     <Compile Include="Controllers\CienteController.cs" />
@@ -1913,25 +1925,18 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\SistemaCoboros.Context.tt">
+    <Content Include="Models\ViewModel\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>SistemaCoboros.Context.cs</LastGenOutput>
-      <DependentUpon>SistemaCoboros.edmx</DependentUpon>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\SistemaCoboros.tt">
+    <Content Include="Models\ViewModel\Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SistemaCoboros.edmx</DependentUpon>
-      <LastGenOutput>SistemaCoboros.cs</LastGenOutput>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\SistemaCoboros.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SistemaCoboros.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\SistemaCoboros.edmx.diagram">
-      <DependentUpon>SistemaCoboros.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\vendor\bootstrap\js\bootstrap.bundle.js.map" />
     <Content Include="Content\vendor\bootstrap\js\bootstrap.bundle.min.js.map" />
     <Content Include="Content\vendor\bootstrap\js\bootstrap.js.map" />
@@ -2081,6 +2086,13 @@
     <Content Include="Content\vendor\fontawesome-free\webfonts\fa-solid-900.woff2" />
     <Content Include="Content\vendor\jquery\jquery.min.map" />
     <Content Include="Content\vendor\jquery\jquery.slim.min.map" />
+    <EntityDeploy Include="Models\ViewModel\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ViewModel\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

@@ -19,6 +19,6 @@ namespace SistemaCobros.Models.ViewModel
         public int Id_cartera { get; set; }
         [DisplayName("Tipo de Pago Realizado")]
         public int Id_tipo_pago { get; set; }
-        
+
     }
 }

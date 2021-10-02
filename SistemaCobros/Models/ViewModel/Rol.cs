@@ -7,24 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SistemaCobros.Models
+namespace SistemaCobros.Models.ViewModel
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Mora
+    public partial class Rol
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Mora()
+        public Rol()
         {
-            this.Cartera = new HashSet<Cartera>();
+            this.rol_operacion = new HashSet<rol_operacion>();
+            this.Usuario = new HashSet<Usuario>();
         }
     
-        public int id_mora { get; set; }
+        public int id_rol { get; set; }
         public string descripcion { get; set; }
-        public decimal porcentaje { get; set; }
+        public int id_estado { get; set; }
     
+        public virtual Estado Estado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cartera> Cartera { get; set; }
+        public virtual ICollection<rol_operacion> rol_operacion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Usuario> Usuario { get; set; }
     }
 }

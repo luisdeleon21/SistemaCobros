@@ -19,7 +19,7 @@ namespace SistemaCobros.Controllers
         {
             try
             {
-                using (Models.sistema_cobrosEntities2 db = new Models.sistema_cobrosEntities2())
+                using (Models.ViewModel.sistema_cobrosEntities1 db = new Models.ViewModel.sistema_cobrosEntities1())
                 {
                     var oUser = (from d in db.Usuario
 

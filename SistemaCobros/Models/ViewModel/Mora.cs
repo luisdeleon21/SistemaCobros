@@ -7,31 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SistemaCobros.Models
+namespace SistemaCobros.Models.ViewModel
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Factura_Credito
+    public partial class Mora
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Factura_Credito()
+        public Mora()
         {
             this.Cartera = new HashSet<Cartera>();
         }
     
-        public int id_factura { get; set; }
-        public decimal total { get; set; }
-        public int cantidad_cuotas { get; set; }
-        public decimal monto_cuota { get; set; }
-        public int id_cliente { get; set; }
-        public int dia_mes_pago { get; set; }
-        public string estado { get; set; }
-        public string serie { get; set; }
-        public string numero { get; set; }
+        public int id_mora { get; set; }
+        public string descripcion { get; set; }
+        public decimal porcentaje { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cartera> Cartera { get; set; }
-        public virtual Ciente Ciente { get; set; }
     }
 }

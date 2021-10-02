@@ -7,31 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SistemaCobros.Models
+namespace SistemaCobros.Models.ViewModel
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Usuario
+    public partial class Operacion
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Usuario()
+        public Operacion()
         {
-            this.Cartera = new HashSet<Cartera>();
-            this.Gestion = new HashSet<Gestion>();
+            this.rol_operacion = new HashSet<rol_operacion>();
         }
     
-        public int id_usuario { get; set; }
-        public string nombre { get; set; }
-        public string contrasena { get; set; }
-        public int id_rol { get; set; }
-        public int id_estado { get; set; }
+        public int operacion_id { get; set; }
+        public Nullable<int> modulo_id { get; set; }
     
+        public virtual Modulo Modulo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cartera> Cartera { get; set; }
-        public virtual Estado Estado { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Gestion> Gestion { get; set; }
-        public virtual Rol Rol { get; set; }
+        public virtual ICollection<rol_operacion> rol_operacion { get; set; }
     }
 }

@@ -7,20 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SistemaCobros.Models
+namespace SistemaCobros.Models.ViewModel
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Cliente_Tipo_Pago
+    public partial class Bitacora
     {
-        public int id_cliente_tipo_pago { get; set; }
-        public string no_tarjeta { get; set; }
-        public string fecha_vencimiento { get; set; }
-        public string cvv { get; set; }
-        public int id_cliente { get; set; }
-        public int id_estado { get; set; }
-    
-        public virtual Ciente Ciente { get; set; }
+        public int id_bitacora { get; set; }
+        public string accion { get; set; }
+        public string usuario { get; set; }
+        public string cliente { get; set; }
+        public System.DateTime fecha { get; set; }
+        public System.TimeSpan hora { get; set; }
     }
 }

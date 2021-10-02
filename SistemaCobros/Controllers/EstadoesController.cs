@@ -6,13 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using SistemaCobros.Models;
+using SistemaCobros.Models.ViewModel;
 
 namespace SistemaCobros.Views
 {
     public class EstadoesController : Controller
     {
-        private sistema_cobrosEntities db = new sistema_cobrosEntities();
+        private Models.ViewModel.sistema_cobrosEntities1 db = new Models.ViewModel.sistema_cobrosEntities1();
 
         // GET: Estadoes
         public ActionResult Index()

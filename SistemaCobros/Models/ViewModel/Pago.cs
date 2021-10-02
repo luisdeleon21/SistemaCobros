@@ -7,22 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SistemaCobros.Models
+namespace SistemaCobros.Models.ViewModel
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Detalle_Gestion
+    public partial class Pago
     {
-        public int id_detalle_gestion { get; set; }
-        public string descripcion { get; set; }
-        public System.DateTime fecha { get; set; }
-        public System.TimeSpan hora { get; set; }
-        public int id_gestion { get; set; }
-        public int id_tipo_gestion { get; set; }
-        public string comentario { get; set; }
+        public int id_pago { get; set; }
+        public decimal monto { get; set; }
+        public decimal mora { get; set; }
+        public System.DateTime fecha_pago { get; set; }
+        public int id_cartera { get; set; }
+        public int id_tipo_pago { get; set; }
     
-        public virtual Gestion Gestion { get; set; }
-        public virtual Tipo_Gestion Tipo_Gestion { get; set; }
+        public virtual Cartera Cartera { get; set; }
+        public virtual Tipo_Pago Tipo_Pago { get; set; }
     }
 }

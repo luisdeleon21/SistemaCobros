@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using SistemaCobros.Models;
+using SistemaCobros.Models.ViewModel;
 using System.Net.Mail;
 using System.Configuration;
 using System.Web.Configuration;
@@ -22,7 +22,7 @@ namespace SistemaCobros.Views
 {
     public class GestionController : Controller
     {
-        private sistema_cobrosEntities db = new sistema_cobrosEntities();
+        private Models.ViewModel.sistema_cobrosEntities1 db = new Models.ViewModel.sistema_cobrosEntities1();
 
         // GET: Gestion
         public ActionResult Index()
