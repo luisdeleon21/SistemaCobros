@@ -1,0 +1,18 @@
+﻿@using SistemaCobros.Models.ViewModel
+@model List<ListRegistroPagoViewModel>
+
+@{
+    Layout = null;
+}
+
+
+@foreach (var oRegistroPago in Model)
+{ 
+    <div>
+        Correlativo Pago: @oRegistroPago.Id<br />
+        Monto Cancelado: @oRegistroPago.Monto <br />
+        Fecha de Pago Realizado: @oRegistroPago.Fecha_Pago <br />
+    </div>
+
+
+}

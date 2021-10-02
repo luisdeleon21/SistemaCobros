@@ -142,6 +142,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RegistroPagoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -202,6 +203,8 @@
     <Compile Include="Models\Usuario.cs">
       <DependentUpon>SistemaCoboros.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModel\InsertRegistroPagoViewModel.cs" />
+    <Compile Include="Models\ViewModel\ListRegistroPagoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\CarteraController.cs" />
     <Compile Include="Controllers\CienteController.cs" />
@@ -2155,6 +2158,9 @@
     <Content Include="Views\Rol\Details.cshtml" />
     <Content Include="Views\Rol\Edit.cshtml" />
     <Content Include="Views\Rol\Index.cshtml" />
+    <Content Include="Views\RegistroPago\Index.cshtml" />
+    <Content Include="Views\RegistroPago\List.cshtml" />
+    <Content Include="Views\RegistroPago\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

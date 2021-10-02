@@ -1,0 +1,74 @@
+﻿@model SistemaCobros.Models.ViewModel.InsertRegistroPagoViewModel
+@{
+    ViewBag.Title = "Ingreso de Pagos";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+<form>
+    <div class="row">
+        <div class="form-group">
+            @Html.LabelFor(d => d.Monto)
+            @Html.TextBoxFor(d => d.Monto, new { id="Monto" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(d => d.Mora)
+            @Html.TextBoxFor(d => d.Mora, new { id = "Mora" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(d => d.Fecha_Pago)
+            @Html.TextBoxFor(d => d.Fecha_Pago, new { id = "FechaPago" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(d => d.Id_cartera)
+            @Html.TextBoxFor(d => d.Id_cartera,new { id = "Cartera" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(d => d.Id_tipo_pago)
+            @Html.TextBoxFor(d => d.Id_tipo_pago, new { id = "TipoPago" })
+        </div>
+
+        <input type="button" value="Guardar Boleta" onclick="jsAdd()" />
+
+    </div>
+</form>
+
+
+<script>
+    var url = "@Url.Content("~/RegistoPago/Save");
+    function jsAdd() {
+        fetch(url, {
+            method: "POST",
+            body: JSON.stringify({
+                Monto: document.getElementById("Monto").value,
+                Mora: document.getElementById("Mora").value,
+                FechaPago: document.getElementById("FechaPago").value,
+                Cartera: document.getElementById("Cartera").value,
+                TipoPago: document.getElementById("TipoPago").value,
+            }),
+            headers: {
+                "Accept": "aplication/json",
+                "Content-Type": "aplication/json"
+            }
+        }).then(function (response) {
+            if (response.ok)
+                return response.text()
+            else
+                alert("Error en el proceso de ejecución :/")
+
+        }).then(function (Data) {
+            if (Data != "1") {
+                alert(Data)
+            }
+            else {
+                document.location.href="@Url.Content("~/RegistroPago/")"
+            }
+        })
+    }
+
+</script>
