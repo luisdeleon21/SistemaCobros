@@ -4,59 +4,66 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Historial de gestiones</h2>
 
-<p>
-    </p>
-<table class="table">
-    <tr>
-        <th>
-            Deudoraaaa´´´´
-        </th>
-        <th>
-            Descripción
-        </th>
-        <th>
-            Fecha
-        </th>
-        <th>
-            Hora
-        </th>
-        <th>
-          Comentario
-        </th>
-        
-        <th>
-           Gestion
-        </th>
-        <th></th>
-    </tr>
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Historial de Gestiones<h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" cellspacing="0" style="padding-left:20px">
+                    <tr>
+                        <th>
+                            Deudor
+                        </th>
+                        <th>
+                            Descripción
+                        </th>
+                        <th>
+                            Fecha
+                        </th>
+                        <th>
+                            Hora
+                        </th>
+                        <th>
+                            Comentario
+                        </th>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Gestion.Cartera.Factura_Credito.Ciente.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fecha)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.hora)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.comentario)
-        </td>
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.Tipo_Gestion.descripcion)
-        </td>
-        <td>
-           
-        </td>
-    </tr>
-}
+                        <th>
+                            Gestion
+                        </th>
+                        
+                    </tr>
 
-</table>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Gestion.Cartera.Factura_Credito.Ciente.nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.descripcion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.fecha)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.hora)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.comentario)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Tipo_Gestion.descripcion)
+                            </td>
+                    
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

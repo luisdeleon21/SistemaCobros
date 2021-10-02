@@ -4,69 +4,92 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Gestiones</h2>
-
 <p>
-    @Html.ActionLink("Crear Gestion", "Create")
+    <div style="padding-left:30px">
+
+        @Html.ActionLink(" Crear Gestión", "Create", new { }, new { @class = "btn btn-outline-primary btn-def " })
+
+    </div>
 </p>
-<table class="table">
-    <tr>
-        <th>
-            Gestor
-        </th>
-        <th>
-            Fecha de vencimiento
-        </th>
-        <th>
-            Saldo
-        </th>
-        <th>
-            Dia de Pago
-        </th>
-        <th>
-            Monto de cuota
-        </th>
-        <th>
-            Cuotas
-        </th>
-        <th>
-            Deuda
-        </th>
-        <th></th>
-    </tr>
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Gestión</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" cellspacing="0" style="padding-left:20px">
+                    <tr>
+                        <th>
+                            Gestor
+                        </th>
+                        <th>
+                            Fecha de vencimiento
+                        </th>
+                        <th>
+                            Saldo
+                        </th>
+                        <th>
+                            Dia de Pago
+                        </th>
+                        <th>
+                            Monto de cuota
+                        </th>
+                        <th>
+                            Cuotas
+                        </th>
+                        <th>
+                            Deuda
+                        </th>
+                        <th>
+                            Cliente
+                        </th>
+                        <th></th>
+                    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cartera.Usuario.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cartera.fecha_vencimiento)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cartera.saldo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cartera.Factura_Credito.dia_mes_pago)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cartera.Factura_Credito.monto_cuota)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cartera.Factura_Credito.cantidad_cuotas)
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cartera.Usuario.nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cartera.fecha_vencimiento)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cartera.saldo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cartera.Factura_Credito.dia_mes_pago)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cartera.Factura_Credito.monto_cuota)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cartera.Factura_Credito.cantidad_cuotas)
 
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cartera.Factura_Credito.total)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cartera.Factura_Credito.total)
 
-        </td>
-        <td>
-            @Html.ActionLink("Llamar", "Edit", new { id = item.id_gestion }) |
-            @Html.ActionLink("SMS", "Details", new { id = item.id_gestion }) |
-            @Html.ActionLink("Email", "Delete", new { id = item.id_gestion }) |
-            @Html.ActionLink("Ver Gestiones", "Details", new { id = item.id_gestion })
-        </td>
-    </tr>
-}
+                        </td>
+                        <td>
+                            
+                            @Html.DisplayFor(modelItem => item.Cartera.Factura_Credito.Ciente.nombre) @Html.DisplayFor(modelItem => item.Cartera.Factura_Credito.Ciente.apellido)
 
-</table>
+                        </td>
+                        <td>
+                            @Html.ActionLink(" ", "EnvioCorreo", new { idgestion = item.id_gestion, id = item.Cartera.Factura_Credito.id_cliente }, new { @class = "btn btn-outline-primary btn-def fa fa-envelope-o fa-4x aria - hidden = 'true'", @style = "font-size:12px" })
+                            @Html.ActionLink(" ", "EnvioSMS", new { idgestion = item.id_gestion, id = item.Cartera.Factura_Credito.id_cliente }, new { @class = "btn btn-outline-primary btn-def fa fa-comment-o fa-4x aria - hidden = 'true'", @style = "font-size:12px" })
+                            @Html.ActionLink(" ", "Llamar", new { id = item.id_gestion }, new { @class = "btn btn-outline-primary btn-def fa  fa-phone fa-4x aria - hidden = 'true'", @style = "font-size:12px" })
+                            
+                            @Html.ActionLink(" ", "Index", "Detalle_Gestion", new { id = item.id_gestion }, new { @class = "btn btn-outline-primary btn-def fa fa-eye fa-4x aria - hidden = 'true'", @style = "font-size:12px" })
+                        </td>
+                    </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
